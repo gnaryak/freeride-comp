@@ -10,7 +10,7 @@ function processStartList(evt, context) {
     rerandomize = (evt.rerandomize === "true"),
     lookup = (evt.lookup === "true");
   createStartList(
-    evt.seriesId, evt.seriesYear, evt.compId, evt.dateString, lookup, rerandomize,
+    evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, lookup, rerandomize,
   function handleStartList(err, startList) {
     if (err) {
       debug("[error] %s, %j", err.message, err);
