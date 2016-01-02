@@ -5,7 +5,7 @@ var
 describe("startList", function () {
   it("should work", function (done) {
     this.timeout(10000);
-    startList("tjfs", 2016, "sb", "2016-01-08", true, false,
+    startList("tjfs", 2016, "sb", "day2", true, false,
     function handleStartList(err, response) {
       if (err) {
         throw err;
