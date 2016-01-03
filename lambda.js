@@ -23,7 +23,7 @@ function processStartList(evt, context) {
 
 function processResults(evt, context) {
   debug("[info] processResults");
-  createResults(evt.seriesId, evt.seriesYear, evt.compId, evt.division,
+  createResults(evt.seriesId, evt.seriesYear, evt.compId, evt.division, "csv",
   function handleResults(err, results) {
     if (err) {
       debug("[error] %s, %j", err.message, err);
