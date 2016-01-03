@@ -16,7 +16,7 @@ describe("startList", function () {
     });
   });
 
-  it.only("should support cutoffs", function (done) {
+  it("should support cutoffs", function (done) {
     this.timeout(10000);
     startList("tjfs", 2016, "sb", "finals", false, false,
     function handleStartList(err, response) {
