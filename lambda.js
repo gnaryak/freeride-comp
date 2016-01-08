@@ -8,9 +8,10 @@ function processStartList(evt, context) {
   debug("[info] processStartList");
   var
     rerandomize = (evt.rerandomize === "true"),
-    lookup = (evt.lookup === "true");
+    lookup = (evt.lookup === "true"),
+    options = {lookup: lookup, rerandomize: rerandomize};
   createStartList(
-    evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, lookup, rerandomize,
+    evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, options,
   function handleStartList(err, startList) {
     if (err) {
       debug("[error] %s, %j", err.message, err);
@@ -23,7 +24,7 @@ function processStartList(evt, context) {
 
 function processResults(evt, context) {
   debug("[info] processResults");
-  createResults(evt.seriesId, evt.seriesYear, evt.compId, evt.division, "csv",
+  createResults(evt.seriesId, evt.seriesYear, evt.compId, evt.division, {format: "csv"},
   function handleResults(err, results) {
     if (err) {
       debug("[error] %s, %j", err.message, err);

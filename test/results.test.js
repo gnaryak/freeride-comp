@@ -3,9 +3,9 @@ var
   createResults = require("../lib/results.js");
 
 describe("results", function () {
-  it("should work", function (done) {
+  it.only("should work", function (done) {
     this.timeout(10000);
-    createResults("tjfs", 2016, "sb", "F11-14", "csv",
+    createResults("dev", 2016, "db", "F11-14", {format: "csv"},
     function handleResults(err, results) {
       if (err) {
         throw err;
@@ -18,7 +18,7 @@ describe("results", function () {
 
   it("should respond with an array", function (done) {
     this.timeout(10000);
-    createResults("tjfs", 2016, "sb", "BOARDM11-14", "array",
+    createResults("dev", 2016, "db", "BOARDM11-14", {format: "array"},
     function handleResults(err, results) {
       if (err) {
         throw err;
