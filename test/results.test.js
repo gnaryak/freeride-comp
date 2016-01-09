@@ -3,9 +3,9 @@ var
   createResults = require("../lib/results.js");
 
 describe("results", function () {
-  it.only("should work", function (done) {
+  it("should work", function (done) {
     this.timeout(10000);
-    createResults("dev", 2016, "db", "F11-14", {format: "csv"},
+    createResults("tjfs", 2016, "sb", "M11-14", {format: "csv"},
     function handleResults(err, results) {
       if (err) {
         throw err;

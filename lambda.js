@@ -1,11 +1,14 @@
-var debug = require("debug")("tjfs:lambda"),
+var
+  _ = require("lodash"),
   createStartList = require("./lib/startList.js"),
-  createResults = require("./lib/results.js");
+  createResults = require("./lib/results.js"),
+  createResultDetails = require("./lib/resultDetails.js"),
+  validateResults = require("./lib/validateResults.js");
 
-debug("[info] loading tjfs lambda handler");
+console.log("[info] loading tjfs lambda handler");
 
 function processStartList(evt, context) {
-  debug("[info] processStartList");
+  console.log("[info] processStartList");
   var
     rerandomize = (evt.rerandomize === "true"),
     lookup = (evt.lookup === "true"),
@@ -14,24 +17,63 @@ function processStartList(evt, context) {
     evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, options,
   function handleStartList(err, startList) {
     if (err) {
-      debug("[error] %s, %j", err.message, err);
+      console.log("[error] %s, %j", err.message, err);
       return context.done({error: err.message, detail: err});
     }
-    debug("[info] success: %s", startList);
+    console.log("[info] success: %s", startList);
     context.done(null, {csv: startList});
   });
 }
 
 function processResults(evt, context) {
-  debug("[info] processResults");
+  console.log("[info] processResults");
   createResults(evt.seriesId, evt.seriesYear, evt.compId, evt.division, {format: "csv"},
   function handleResults(err, results) {
     if (err) {
-      debug("[error] %s, %j", err.message, err);
+      console.log("[error] %s, %j", err.message, err);
       return context.done({error: err.message, detail: err});
     }
-    debug("[info] success: %s", results);
+    console.log("[info] success: %s", results);
     context.done(null, {csv: results});
+  });
+}
+
+function processResultDetails(evt, context) {
+  console.log("[info] processResultDetails");
+  createResultDetails(evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, {},
+  function handleResultDetails(err, resultDetails) {
+    if (err) {
+      console.log("[error] %s, %j", err.message, err);
+      return context.done({error: err.message, detail: err});
+    }
+    console.log("[info] success: %s", resultDetails);
+    context.done(null, {csv: resultDetails});
+  });
+}
+
+function processValidateResults(evt, context) {
+  console.log("[info] processValidateResults");
+  validateResults(evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup,
+  function handleValidateResults(err, errors) {
+    if (err) {
+      console.log("[error] %s, %j", err.message, err);
+      return context.done({error: err.message, detail: err});
+    }
+    console.log("[info] successful validation: %d errors found", errors.length);
+    var output = _.map(errors, function mapError(e) {
+      var
+        noDetail = (JSON.stringify(e) === "{}"),
+        outE = {message: e.message};
+      if (!noDetail) {
+        outE.detail = e;
+      }
+      if (e.source) {
+        outE.sourceMessage = e.source.message;
+        outE.sourceDetail = e.source;
+      }
+      return outE;
+    });
+    context.done(null, output);
   });
 }
 
@@ -44,7 +86,7 @@ function processResults(evt, context) {
  *   - payload: a parameter to pass to the operation being performed
  */
 exports.handler = function(event, context) {
-  debug("[info] received event: %s", JSON.stringify(event, null, 2));
+  console.log("[info] received event: %s", JSON.stringify(event, null, 2));
   var operation = event.operation;
   switch (operation) {
     case "startList":
@@ -52,6 +94,12 @@ exports.handler = function(event, context) {
       break;
     case "results":
       processResults(event, context);
+      break;
+    case "resultDetails":
+      processResultDetails(event, context);
+      break;
+    case "validateResults":
+      processValidateResults(event, context);
       break;
     case "ping":
       context.done(null, "pong");
