@@ -27,7 +27,17 @@ function processStartList(evt, context) {
 
 function processResults(evt, context) {
   console.log("[info] processResults");
-  createResults(evt.seriesId, evt.seriesYear, evt.compId, evt.division, {format: "csv"},
+  var options = {format: "csv"};
+  if (evt.division) {
+    options.division = evt.division;
+  }
+  if (evt.divisionType) {
+    options.divisionType = evt.divisionType;
+  }
+  if (evt.content) {
+    options.content = evt.content;
+  }
+  createResults(evt.seriesId, evt.seriesYear, evt.compId, options,
   function handleResults(err, results) {
     if (err) {
       console.log("[error] %s, %j", err.message, err);
