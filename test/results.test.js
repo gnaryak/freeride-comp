@@ -81,7 +81,7 @@ describe("results", function () {
     });
   });
 
-  it.only("should support a ties option", function (done) {
+  it("should support a ties option", function (done) {
     this.timeout(10000);
     createResults("tjfs", 2016, "sb",
     {division: "F15-18", ties: "leave", format: "csv"},
