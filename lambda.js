@@ -37,6 +37,9 @@ function processResults(evt, context) {
   if (evt.content) {
     options.content = evt.content;
   }
+  if (evt.ties) {
+    options.ties = evt.ties;
+  }
   createResults(evt.seriesId, evt.seriesYear, evt.compId, options,
   function handleResults(err, results) {
     if (err) {
