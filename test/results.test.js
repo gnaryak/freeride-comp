@@ -68,4 +68,17 @@ describe("results", function () {
     });
   });
 
+  it("should work with unisex divisions", function (done) {
+    this.timeout(10000);
+    createResults("tjfs", 2016, "sb", {division: "BOARD11-14", format: "csv"},
+    function handleResults(err, results) {
+      if (err) {
+        throw err;
+      }
+      console.log("results: %j", results);
+      expect(results).to.be.a("string");
+      done();
+    });
+  });
+
 });
