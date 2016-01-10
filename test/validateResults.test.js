@@ -6,7 +6,7 @@ var
 describe("validateResults", function () {
   it("should work", function (done) {
     this.timeout(20000);
-    validateResults("tjfs", 2016, "sb", "Friday",
+    validateResults("tjfs", 2016, "sb", "Saturday",
     function handleStartList(err, errors) {
       if (err) {
         throw err;
