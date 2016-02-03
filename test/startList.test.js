@@ -18,7 +18,7 @@ describe("startList", function () {
 
   it("should support cutoffs", function (done) {
     this.timeout(10000);
-    startList("dev", 2016, "db", "finals", {lookup: false, rerandomize: false},
+    startList("stevensregional", 2016, "stevens", "Sunday", {lookup: false, rerandomize: false},
     function handleStartList(err, response) {
       if (err) {
         throw err;
