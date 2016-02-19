@@ -16,9 +16,9 @@ describe("startList", function () {
     });
   });
 
-  it("should support cutoffs", function (done) {
+  it.only("should support cutoffs", function (done) {
     this.timeout(10000);
-    startList("stevensregional", 2016, "stevens", "Sunday", {lookup: false, rerandomize: false},
+    startList("stevensregional", 2016, "stevens", "Saturday", {lookup: false, rerandomize: false},
     function handleStartList(err, response) {
       if (err) {
         throw err;
