@@ -17,15 +17,19 @@ describe("results", function () {
     });
   });
 
-  it("should respond with an array", function (done) {
+  it.only("should respond with an array", function (done) {
     this.timeout(10000);
-    createResults("dev", 2016, "db", {division: "BOARDM11-14", format: "array"},
+    createResults("tjfs", 2016, "kirkwood", {division: "BOARD11-14", format: "array"},
     function handleResults(err, results) {
       if (err) {
         throw err;
       }
       console.log("results: %j", results);
       expect(results).to.be.an("array");
+      _.forEach(results, function validateResult(r) {
+        expect(r.score).to.be.above(0);
+        expect(r.scores).to.not.eql({});
+      });
       done();
     });
   });
