@@ -5,7 +5,7 @@ var
 describe("startList", function () {
   it("should work", function (done) {
     this.timeout(10000);
-    startList("dev", 2016, "db", "day2", {lookup: true, rerandomize: false},
+    startList("alpinenational", 2016, "alpine", "Q1", {lookup: true, rerandomize: false},
     function handleStartList(err, response) {
       if (err) {
         throw err;
@@ -16,7 +16,7 @@ describe("startList", function () {
     });
   });
 
-  it.only("should support cutoffs", function (done) {
+  it("should support cutoffs", function (done) {
     this.timeout(10000);
     startList("stevensregional", 2016, "stevens", "Saturday", {lookup: false, rerandomize: false},
     function handleStartList(err, response) {
