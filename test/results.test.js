@@ -17,7 +17,7 @@ describe("results", function () {
     });
   });
 
-  it.only("should respond with an array", function (done) {
+  it("should respond with an array", function (done) {
     this.timeout(10000);
     createResults("tjfs", 2016, "kirkwood", {division: "BOARD11-14", format: "array"},
     function handleResults(err, results) {
