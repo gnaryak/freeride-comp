@@ -6,7 +6,7 @@ var
 describe("results", function () {
   it("should work", function (done) {
     this.timeout(10000);
-    createResults("tjfs", 2016, "sb", {division: "M11-14", format: "csv"},
+    createResults("tjfs", 2016, "kirkwood", {division: "F11-14", format: "csv"},
     function handleResults(err, results) {
       if (err) {
         throw err;
