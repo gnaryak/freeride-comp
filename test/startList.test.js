@@ -5,7 +5,7 @@ var
 describe("startList", function () {
   it("should work", function (done) {
     this.timeout(10000);
-    startList("alpinenational", 2016, "alpine", "Q1", {lookup: true, rerandomize: false},
+    startList("crystalnational", 2016, "crystal", "Q1214", {lookup: true, rerandomize: false},
     function handleStartList(err, response) {
       if (err) {
         throw err;
