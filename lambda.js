@@ -66,27 +66,14 @@ function processResultDetails(evt, context) {
 
 function processValidateResults(evt, context) {
   console.log("[info] processValidateResults");
-  validateResults(evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup,
-  function handleValidateResults(err, errors) {
+  validateResults(evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, {},
+  function handleValidateResults(err, valResults) {
     if (err) {
       console.log("[error] %s, %j", err.message, err);
       return context.done({error: err.message, detail: err});
     }
-    console.log("[info] successful validation: %d errors found", errors.length);
-    var output = _.map(errors, function mapError(e) {
-      var
-        noDetail = (JSON.stringify(e) === "{}"),
-        outE = {message: e.message};
-      if (!noDetail) {
-        outE.detail = e;
-      }
-      if (e.source) {
-        outE.sourceMessage = e.source.message;
-        outE.sourceDetail = e.source;
-      }
-      return outE;
-    });
-    context.done(null, output);
+    console.log("[info] successful validation: %j", valResults);
+    context.done(null, {csv: valResults});
   });
 }
 
