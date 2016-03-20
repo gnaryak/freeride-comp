@@ -99,10 +99,38 @@ describe("results", function () {
     });
   });
 
-  it("should support the scalar option", function (done) {
+  it("should support a numeric scalar option", function (done) {
     this.timeout(10000);
     createResults("crystalnational", 2016, "crystal",
-    {division: "F15-18", format: "csv", scalars: {control: 1.5, technique: 1.25}},
+    {division: "F15-18", format: "csv", scalars: {control: 1.5}},
+    function handleResults(err, results) {
+      if (err) {
+        throw err;
+      }
+      console.log("results: %j", results);
+      expect(results).to.be.a("string");
+      done();
+    });
+  });
+
+  it("should support a string scalar option", function (done) {
+    this.timeout(10000);
+    createResults("crystalnational", 2016, "crystal",
+    {division: "F15-18", format: "csv", scalars: {control: "1.5"}},
+    function handleResults(err, results) {
+      if (err) {
+        throw err;
+      }
+      console.log("results: %j", results);
+      expect(results).to.be.a("string");
+      done();
+    });
+  });
+
+  it("should support multiple string scalar options", function (done) {
+    this.timeout(10000);
+    createResults("crystalnational", 2016, "crystal",
+    {division: "F15-18", format: "csv", scalars: {control: "1.5", technique: "1.25"}},
     function handleResults(err, results) {
       if (err) {
         throw err;
