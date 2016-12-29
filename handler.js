@@ -122,12 +122,28 @@ function processResultDetails(evt, context, callback) {
   });
 }
 
+/**
+ * Validate results.
+ */
+function processValidateResults(evt, context, callback) {
+  console.log("[info] processValidateResults");
+  validateResults(evt.query.seriesId, evt.query.seriesYear, evt.query.compId, evt.query.runGroup, {},
+  function handleValidateResults(err, valResults) {
+    if (err) {
+      console.log("[error] %s, %j", err.message, err);
+      return callback({error: err.message, detail: err});
+    }
+    console.log("[info] successful validation: %j", valResults);
+    callback(null, {csv: valResults});
+  });
+}
 
 module.exports = {
   hello: sayHello,
   startList: processStartList,
   results: processResults,
-  resultDetails: processResultDetails
+  resultDetails: processResultDetails,
+  validateResults: processValidateResults
 }
 
 
@@ -144,18 +160,6 @@ module.exports = {
 
 
 
-function processValidateResults(evt, context) {
-  console.log("[info] processValidateResults");
-  validateResults(evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, {},
-  function handleValidateResults(err, valResults) {
-    if (err) {
-      console.log("[error] %s, %j", err.message, err);
-      return context.done({error: err.message, detail: err});
-    }
-    console.log("[info] successful validation: %j", valResults);
-    context.done(null, {csv: valResults});
-  });
-}
 
 function processOverallResults(evt, context) {
   console.log("[info] processOverallResults");
