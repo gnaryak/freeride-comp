@@ -47,71 +47,77 @@ const processStartList = (evt, context, callback) => {
   });
 }
 
-module.exports = {
-  hello: sayHello,
-  startList: processStartList
-}
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Create a component scalar object from the event.
  * If there are no component scalars, return undefined.
  */
-function createComponentScalars(evt) {
+function createComponentScalars(evtQuery) {
   var
     has = false,
     scalars = {},
     props = ["line", "control", "technique", "fluidity", "style"];
   _.forEach(props, function checkProp(prop) {
     var scalarName = prop + "Scalar";
-    if (evt[scalarName]) {
+    if (evtQuery[scalarName]) {
       has = true;
-      scalars[prop] = evt[scalarName];
+      scalars[prop] = evtQuery[scalarName];
     }
   });
   return has ? scalars : undefined;
 }
 
-function processResults(evt, context) {
+/**
+ * Process a results request.
+ */
+function processResults(evt, context, callback) {
   console.log("[info] processResults");
   var
     options = {format: "csv"},
-    scalars = createComponentScalars(evt);
+    scalars = createComponentScalars(evt.query);
   if (scalars) {
     options.scalars = scalars;
   }
-  if (evt.division) {
-    options.division = evt.division;
+  if (evt.query.division) {
+    options.division = evt.query.division;
   }
-  if (evt.divisionType) {
-    options.divisionType = evt.divisionType;
+  if (evt.query.divisionType) {
+    options.divisionType = evt.query.divisionType;
   }
-  if (evt.content) {
-    options.content = evt.content;
+  if (evt.query.content) {
+    options.content = evt.query.content;
   }
-  if (evt.ties) {
-    options.ties = evt.ties;
+  if (evt.query.ties) {
+    options.ties = evt.query.ties;
   }
-  createResults(evt.seriesId, evt.seriesYear, evt.compId, options,
+  createResults(evt.query.seriesId, evt.query.seriesYear, evt.query.compId, options,
   function handleResults(err, results) {
     if (err) {
       console.log("[error] %s, %j", err.message, err);
-      return context.done({error: err.message, detail: err});
+      callback({error: err.message, detail: err});
     }
     console.log("[info] success: %s", results);
-    context.done(null, {csv: results});
+    callback(null, {csv: results});
   });
 }
+
+module.exports = {
+  hello: sayHello,
+  startList: processStartList,
+  results: processResults
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function processResultDetails(evt, context) {
   console.log("[info] processResultDetails");

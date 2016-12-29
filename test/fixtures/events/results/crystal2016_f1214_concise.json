@@ -1,0 +1,10 @@
+{
+  "query": {
+    "seriesId": "crystalnational",
+    "seriesYear": 2016,
+    "compId": "crystal",
+    "division": "F12-14",
+    "content": "concise",
+    "ties": "line,control,technique,fluidity,style"
+  }
+}

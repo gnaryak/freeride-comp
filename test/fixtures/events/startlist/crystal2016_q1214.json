@@ -1,0 +1,10 @@
+{
+  "query": {
+    "seriesId": "crystalnational",
+    "seriesYear": 2016,
+    "compId": "crystal",
+    "runGroup": "Q1214",
+    "lookup": true,
+    "rerandomize": false
+  }
+}
