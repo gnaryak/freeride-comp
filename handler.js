@@ -138,73 +138,27 @@ function processValidateResults(evt, context, callback) {
   });
 }
 
+/**
+ * Process overall results.
+ */
+function processOverallResults(evt, context, callback) {
+  console.log("[info] processOverallResults");
+  createOverallResults(evt.query.seriesId, evt.query.seriesYear, evt.query.division, {},
+  function handleOverallResults(err, overallResults) {
+    if (err) {
+      console.log("[error] %s, %j", err.message, err);
+      return callback({error: err.message, detail: err});
+    }
+    console.log("[info] successful overall results: %j", overallResults);
+    callback(null, {csv: overallResults});
+  });
+}
+
 module.exports = {
   hello: sayHello,
   startList: processStartList,
   results: processResults,
   resultDetails: processResultDetails,
-  validateResults: processValidateResults
+  validateResults: processValidateResults,
+  overallResults: processOverallResults
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function processOverallResults(evt, context) {
-  console.log("[info] processOverallResults");
-  createOverallResults(evt.seriesId, evt.seriesYear, evt.division, {},
-  function handleOverallResults(err, overallResults) {
-    if (err) {
-      console.log("[error] %s, %j", err.message, err);
-      return context.done({error: err.message, detail: err});
-    }
-    console.log("[info] successful overall results: %j", overallResults);
-    context.done(null, {csv: overallResults});
-  });
-}
-
-/**
- * This is a lambda function that provides access to the other functionality
- * of this module.
- * Provide an event that contains the following keys:
- *
- *   - operation: one of the operations in the switch statement below
- *   - payload: a parameter to pass to the operation being performed
- */
-exports.handler = function(event, context) {
-  console.log("[info] received event: %s", JSON.stringify(event, null, 2));
-  var operation = event.operation;
-  switch (operation) {
-    case "startList":
-      processStartList(event, context);
-      break;
-    case "results":
-      processResults(event, context);
-      break;
-    case "resultDetails":
-      processResultDetails(event, context);
-      break;
-    case "validateResults":
-      processValidateResults(event, context);
-      break;
-    case "overallResults":
-      processOverallResults(event, context);
-      break;
-    case "ping":
-      context.done(null, "pong");
-      break;
-    default:
-      context.done(new Error("Unsupported operation \"" + operation + "\""));
-  }
-};
