@@ -121,6 +121,29 @@ functions:
               Content-Type: "'text/csv'"
             template: $input.path('$').csv
 
+  resultDetails:
+    handler: handler.resultDetails
+    events:
+      - http:
+          path: resultdetails
+          method: get
+          integration: lambda
+          request:
+            parameters:
+              querystrings:
+                  seriesId: true
+                  seriesYear: true
+                  compId: true
+                  runGroup: true
+                  lineScalar: false
+                  controlScalar: false
+                  techniqueScalar: false
+                  fluidityScalar: false
+                  styleScalar: false
+          response:
+            headers:
+              Content-Type: "'text/csv'"
+            template: $input.path('$').csv
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

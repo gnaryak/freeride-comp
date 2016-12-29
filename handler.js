@@ -100,43 +100,49 @@ function processResults(evt, context, callback) {
   });
 }
 
-module.exports = {
-  hello: sayHello,
-  startList: processStartList,
-  results: processResults
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function processResultDetails(evt, context) {
+/**
+ * Generate result details.
+ */
+function processResultDetails(evt, context, callback) {
   console.log("[info] processResultDetails");
   var
     options = {},
-    scalars = createComponentScalars(evt);
+    scalars = createComponentScalars(evt.query);
   if (scalars) {
     options.scalars = scalars;
   }
-  createResultDetails(evt.seriesId, evt.seriesYear, evt.compId, evt.runGroup, options,
+  createResultDetails(evt.query.seriesId, evt.query.seriesYear, evt.query.compId, evt.query.runGroup, options,
   function handleResultDetails(err, resultDetails) {
     if (err) {
       console.log("[error] %s, %j", err.message, err);
-      return context.done({error: err.message, detail: err});
+      return callback({error: err.message, detail: err});
     }
     console.log("[info] success: %s", resultDetails);
-    context.done(null, {csv: resultDetails});
+    callback(null, {csv: resultDetails});
   });
 }
+
+
+module.exports = {
+  hello: sayHello,
+  startList: processStartList,
+  results: processResults,
+  resultDetails: processResultDetails
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function processValidateResults(evt, context) {
   console.log("[info] processValidateResults");
