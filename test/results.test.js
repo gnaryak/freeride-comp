@@ -1,4 +1,6 @@
-var
+"use strict";
+
+const
   _ = require("lodash"),
   expect = require("expect.js"),
   createResults = require("../lib/results.js");
@@ -46,7 +48,7 @@ describe("results", function () {
       var
         priorScore = 9999999,
         priorDivision = "ZZZZZZ";
-      _.each(results, function validateAthlete(a) {
+      _.forEach(results, function validateAthlete(a) {
         if (a.division !== priorDivision) {
           console.log("Division: %s", a.division);
           priorDivision = a.division;

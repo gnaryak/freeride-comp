@@ -89,6 +89,14 @@
     "comma-dangle": [
       2,
       "never"
+    ],
+    "lodash/prefer-lodash-method": [
+      2,
+      {
+        "ignoreObjects": [
+          "async"
+        ]
+      }
     ]
   }
 }

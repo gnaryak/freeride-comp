@@ -1,4 +1,6 @@
-var
+"use strict";
+
+const
   expect = require("expect.js"),
   _ = require("lodash"),
   createOverallResults = require("../lib/overallResults.js");

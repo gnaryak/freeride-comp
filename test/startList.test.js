@@ -1,4 +1,6 @@
-var
+"use strict";
+
+const
   expect = require("expect.js"),
   startList = require("../lib/startList.js");
 

@@ -1,4 +1,6 @@
-var
+"use strict";
+
+const
   expect = require("expect.js"),
   _ = require("lodash"),
   recalculateScores = require("../lib/recalculateScore.js");

@@ -1,4 +1,6 @@
-var
+"use strict";
+
+const
   expect = require("expect.js"),
   _ = require("lodash"),
   validateResults = require("../lib/validateResults.js");
@@ -14,7 +16,7 @@ describe("validateResults", function () {
       }
       console.log("Errors: %j", errors);
       expect(errors).to.be.an("array");
-      _.each(errors, function (e) {
+      _.forEach(errors, function (e) {
         console.log("bib: %d, division: %s, msg: %s", e.bib, e.division, e.message);
         expect(e).to.be.an(Error);
         expect(e.athlete).to.be.an("object");

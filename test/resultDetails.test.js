@@ -1,6 +1,7 @@
-var
-  expect = require("expect.js"),
-  _ = require("lodash"),
+"use strict";
+
+const
+  // expect = require("expect.js"),
   createResultDetails = require("../lib/resultDetails.js");
 
 describe("resultDetails", function () {
