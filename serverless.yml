@@ -32,11 +32,11 @@ provider:
     - Effect: "Allow"
       Action:
         - "s3:GetObject"
-      Resource: "arn:aws:s3:::compdata/*"
+      Resource: "arn:aws:s3:::tfcompdata/*"
     - Effect: "Allow"
       Action:
         - "s3:PutObject"
-      Resource: "arn:aws:s3:::compdata/*"
+      Resource: "arn:aws:s3:::tfcompdata/*"
 
 # you can define service wide environment variables here
 #  environment:

@@ -5,7 +5,7 @@ const
   s3 = new AWS.S3(),
   fs = require("fs"),
   async = require("async"),
-  S3_BUCKET = "compdata",
+  S3_BUCKET = "tfcompdata",
   CONTENT_DIR = "s3content";
 
 function writeToS3(key, content, cb) {
