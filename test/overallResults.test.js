@@ -9,7 +9,7 @@ describe("overallResults", function () {
 
   it("format: array", function (done) {
     this.timeout(10000);
-    createOverallResults("tjfs", 2016, "F11-14", {format: "array"},
+    createOverallResults("tjfs", 2017, "F12-14", {format: "array"},
     function handleResults(err, results) {
       if (err) {
         throw err;
@@ -37,7 +37,7 @@ describe("overallResults", function () {
 
   it("format: file", function (done) {
     this.timeout(10000);
-    createOverallResults("tjfs", 2016, "M11-14", {format: "file"},
+    createOverallResults("tjfs", 2017, "M12-14", {format: "file"},
     function handleResults(err, results) {
       if (err) {
         throw err;
@@ -47,14 +47,14 @@ describe("overallResults", function () {
       // [
       // [order, bib, name, team, pts from comp1, ..., pts from compN, total pts]
       // ]
-      expect(results).to.be("overallResults-M11-14.csv");
+      expect(results).to.be("overallResults-M12-14.csv");
       done();
     });
   });
 
   it("format: csv (default)", function (done) {
     this.timeout(10000);
-    createOverallResults("tjfs", 2016, "BOARD11-14", {},
+    createOverallResults("tjfs", 2017, "BOARD12-14", {},
     function handleResults(err, results) {
       if (err) {
         throw err;
