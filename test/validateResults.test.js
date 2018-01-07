@@ -9,7 +9,7 @@ describe("validateResults", function () {
 
   it("format: array", function (done) {
     this.timeout(20000);
-    validateResults("tjfs", 2017, "sb", "Q1214", {format: "array"},
+    validateResults("tjfs", 2017, "sb", "Friday", {format: "array"},
     function handleValidation(err, errors) {
       if (err) {
         throw err;
