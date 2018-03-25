@@ -4,3 +4,5 @@ node_modules
 s3content
 *.zip
 *.csv
+compsInOverall.json
+output.json

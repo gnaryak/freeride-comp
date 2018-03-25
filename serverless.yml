@@ -19,8 +19,8 @@ service: freeride-comp
 
 provider:
   name: aws
-  runtime: nodejs4.3
-  profile: serverlessTahoeFreeride
+  runtime: nodejs6.10
+  profile: default
   region: us-west-2
 
 
